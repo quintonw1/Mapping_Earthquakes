@@ -163,8 +163,7 @@ legend.addTo(map);
 
 // Adding myStyle object to style the lines 
 let myStyle = {
-  color: "#00ff00",
-  opacity: 0.65,
+  color: "#FE9A2E",
 }
 
 // d3.json call to grab GeoJSON data for tectonic plates
