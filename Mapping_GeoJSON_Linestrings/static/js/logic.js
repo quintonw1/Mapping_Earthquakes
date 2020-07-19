@@ -25,26 +25,29 @@ let baseMaps = {
 let map = L.map('mapid', {
 	center: [44, -80],
 	zoom: 2,
-	layers: [light]
+	layers: [dark]
 });
 
+let myStyle = {
+	color: "yellow",
+	weight : 2
+};
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
-let torontoData = "https://raw.githubusercontent.com/quintonw1/Mapping_Earthquakes/Mapping_geoJSON_Linestrings/majorAirports.json";
+let torontoData = "https://raw.githubusercontent.com/quintonw1/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/Mapping_GeoJSON_Linestrings/torontoRoutes.json";
 
 function createMarkers (data) {
 	console.log(data);
 	data.forEach(function(entry) {
 		// Adding markers with popups 
-		//L.geoJSON(entry,{
-			//onEachFeature: function(feature, layer) {
-				//layer.bindPopup("<h2>Airport code: " + layer.feature.properties.faa + "</h2> <hr> <h3>Airport name: "+ layer.feature.properties.name + "</h3>")
-			//}
-			//}).addTo(map)
-		// Adding markers without popups
-		L.geoJSON(entry).addTo(map);
+		L.geoJSON(entry,{
+			style: myStyle,
+			onEachFeature: function(feature, layer) {
+				layer.bindPopup("<h2>Airline: " + layer.feature.properties.airline + "</h2> <hr> <h3>Destination: "+ layer.feature.properties.dst + "</h3>")
+			}
+			}).addTo(map)
 	});
 };
 
